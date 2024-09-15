@@ -1,0 +1,34 @@
+﻿@page "/logout"
+@using LedSoft.mobile.Utils
+@using Microsoft.AspNetCore.Components.Authorization
+@layout MainLayout
+@code {
+
+    [Inject]
+    ILocalStorageService localStorageService { get; set; }
+
+    [Inject]
+    AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+
+    [Inject]
+    HttpClient Client { get; set; }
+
+
+    [Inject]
+    NavigationManager NavManeger { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await localStorageService.RemoveItemAsync("token");
+        await localStorageService.RemoveItemAsync("email");
+        await localStorageService.RemoveItemAsync("UserId");
+
+        (AuthenticationStateProvider as AuthStateProvider).NotifyUserLogout();
+
+        Client.DefaultRequestHeaders.Authorization = null;
+
+        NavManeger.NavigateTo("/login");
+    }
+
+
+}

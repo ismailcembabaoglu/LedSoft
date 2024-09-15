@@ -44,6 +44,7 @@ namespace LedSoft.Persistence.Extensions
                 CreateMap<Stoktanim,StokTanimDTO>().ReverseMap();
                 CreateMap<CreateStokTanimRequest, Stoktanim>().ReverseMap();
                 CreateMap<UpdateStokTanimRequest, Stoktanim>().ReverseMap();
+                CreateMap<User, UserDTO>().ReverseMap();
 
             }
         }

@@ -27,5 +27,6 @@ namespace LedSoft.Application.DTOs
         public bool? Esikdegerkullan { get; set; }
 
         public long? Varyasyonid { get; set; }
+        public string? BirimName { get; set; }
     }
 }

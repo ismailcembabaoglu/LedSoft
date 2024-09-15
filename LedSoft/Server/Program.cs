@@ -65,7 +65,7 @@ builder.Services.AddAuthentication(opt =>
     {
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = true,
+        ValidateLifetime = false,
         ValidateIssuerSigningKey = true,
         ValidIssuer = configuration["JwtIssuer"],
         ValidAudience = configuration["JwtAudience"],
@@ -76,17 +76,9 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "CorsPolicy",
-                      builder =>
-                      {
-                          builder.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader();
-                      });
-});
+     options.AddDefaultPolicy(builder =>
+     builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -109,7 +101,8 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();

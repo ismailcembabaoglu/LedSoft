@@ -1,0 +1,111 @@
+﻿@page "/stoklist"
+@using LedSoft.Application.CustomExceptions
+@using LedSoft.Application.DTOs
+@using LedSoft.mobile.Utils
+@inject DialogService dialogService
+@inject NotificationService NotificationService
+@layout MainLayout
+<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem" class="rz-p-2">
+    <RadzenButton Shade="Shade.Dark" Icon="add" Variant="Variant.Flat" Click=goCreateUserPage Text="Yeni Ürün Ekle" ButtonStyle="ButtonStyle.Success" />
+</RadzenStack>
+
+<RadzenDataList AllowVirtualization="false" Style="overflow:auto;"
+                WrapItems="true" AllowPaging="true"
+                Data="@Stoks" TItem="StokListDTO" IsLoading=@isLoading PageSize="5" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true">
+    <Template Context="st">
+        <RadzenCard Variant="Variant.Filled"  class="rz-p-0" Style="width: 100%; overflow: hidden; border-style:groove; border-color:hotpink; border-width:2px">
+            <RadzenRow Gap="0">
+                <RadzenColumn Size="12" SizeLG="3" class="rz-p-4 product-title">
+                    <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-color-on-secondary-lighter">@(st.Isim)</RadzenText>
+                </RadzenColumn>
+                <RadzenColumn Size="12" SizeLG="7" class="rz-p-4">
+                    <RadzenRow Gap="0">
+                        <RadzenColumn Size="12" SizeMD="6" SizeLG="2">
+                            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-mb-0">Stok kodu</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body2">@(st.StokKod)</RadzenText>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6" SizeLG="2">
+                            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-mb-0">Birim</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body2">@(st.Birim)</RadzenText>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6" SizeLG="5">
+                            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-mb-0">Kategori</RadzenText>
+                            <RadzenText TextStyle="TextStyle.Body2">@(st.Kategori)</RadzenText>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6" SizeLG="3" class="rz-text-align-start rz-text-align-lg-end">
+                            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-mb-0">Alış Fiyatı</RadzenText>
+                            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Shade="Shade.Lighter" class="price-badge" Text=@($"{String.Format(new System.Globalization.CultureInfo("tr-TR"), "{0:C}", st.AlisFiyat)}") />
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6" SizeLG="3" class="rz-text-align-start rz-text-align-lg-end">
+                            <RadzenText TextStyle="TextStyle.H6" TagName="TagName.H5" class="rz-mb-0">Satış Fiyatı</RadzenText>
+                            <RadzenBadge BadgeStyle="BadgeStyle.Secondary" Shade="Shade.Lighter" class="price-badge" Text=@($"{String.Format(new System.Globalization.CultureInfo("tr-TR"), "{0:C}", st.SatisFiyat)}") />
+                        </RadzenColumn>
+                    </RadzenRow>
+                </RadzenColumn>
+                <RadzenColumn Size="12" SizeLG="2" class="rz-p-4">
+                    <RadzenButton Icon="edit" Click="@(()=> goUpdateUserPage(st.Id))" ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Medium" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Variant="Variant.Flat" Shade="Shade.Lighter" Size="ButtonSize.Medium" class="my-1 ms-1">
+                    </RadzenButton>
+                </RadzenColumn>
+            </RadzenRow>
+        </RadzenCard>
+    </Template>
+</RadzenDataList>
+
+<style>
+    .product-title {
+        min-height: 72px;
+        background-color: var(--rz-secondary-lighter);
+    }
+
+    .price-badge {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 20px;
+        padding: 8px;
+    }
+</style>
+@code {
+    [Inject]
+    public HttpClient Client { get; set; }
+
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+    [Inject]
+    ILocalStorageService localStorageService { get; set; }
+    bool isLoading;
+
+    protected List<StokListDTO> Stoks = new List<StokListDTO>();
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            isLoading = true;
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => { return true; };
+
+            Client = new HttpClient(handler);
+            string token = await localStorageService.GetItemAsStringAsync("token");
+            Stoks = await Client.GetServiceResponseAsync<List<StokListDTO>>($"{ConnectionManager.apiConnection}api/Stok/GetStokTanims", token);
+            isLoading = false;
+        }
+        catch (ApiException ex)
+        {
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Api Hata", Detail = ex.Message, Duration = 4000 });
+        }
+        catch (Exception ex)
+        {
+
+            NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Front Hata", Detail = ex.Message, Duration = 4000 });
+        }
+    }
+    protected void goCreateUserPage()
+    {
+        NavigationManager.NavigateTo("/stoks/add");
+    }
+
+    protected void goUpdateUserPage(long StokId)
+    {
+        NavigationManager.NavigateTo("/stoks/edit/" + StokId);
+    }
+}

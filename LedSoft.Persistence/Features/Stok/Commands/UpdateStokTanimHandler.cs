@@ -30,6 +30,7 @@ namespace LedSoft.Persistence.Features.Stok.Commands
            var dbStokTanim= await _context.Stoktanims.AsNoTracking().Where(c=>c.Id==request.Id).FirstOrDefaultAsync();
             Guard.Against.Null(dbStokTanim, message: "Ürün Bulunamadı");
             _mapper.Map(request, dbStokTanim);
+            _context.Stoktanims.Update(dbStokTanim);
             int result = await _context.SaveChangesAsync();
             return new ServiceResponse<StokTanimDTO>()
             {

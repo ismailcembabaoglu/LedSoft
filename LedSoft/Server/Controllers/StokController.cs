@@ -2,6 +2,7 @@
 using LedSoft.Persistence.Features.Stok.Commands;
 using LedSoft.Persistence.Features.Stok.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace LedSoft.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StokController : ControllerBase
     {
         private readonly IMediator _mediator;

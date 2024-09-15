@@ -25,6 +25,7 @@ namespace LedSoft.Persistence.Features.Stok.Queries
         private readonly IConfiguration _configuration;
         public GetAllStokTanimHandler(LafSadikContext context, IMapper mapper, IConfiguration configuration)
         {
+
             _context = context;
             _mapper = mapper;
             _configuration = configuration;

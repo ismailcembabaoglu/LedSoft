@@ -9,19 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{21785790-F06C-4C4D-97E5-C01A1362955E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSoft.Domain", "Core\LedSoft.Domain\LedSoft.Domain.csproj", "{C545B1B9-4846-4585-8F10-98B4A7A1F08C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.Domain", "Core\LedSoft.Domain\LedSoft.Domain.csproj", "{C545B1B9-4846-4585-8F10-98B4A7A1F08C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSoft.Application", "Core\LedSoft.Application\LedSoft.Application.csproj", "{090BDC44-F1A8-4771-9776-1178ED32119D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.Application", "Core\LedSoft.Application\LedSoft.Application.csproj", "{090BDC44-F1A8-4771-9776-1178ED32119D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSoft.Infrastructure", "Infrastructure\LedSoft.Infrastructure\LedSoft.Infrastructure.csproj", "{FFE75718-A543-4FCA-B2FA-60263984D1EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.Infrastructure", "Infrastructure\LedSoft.Infrastructure\LedSoft.Infrastructure.csproj", "{FFE75718-A543-4FCA-B2FA-60263984D1EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSoft.Persistence", "LedSoft.Persistence\LedSoft.Persistence.csproj", "{C1106A57-7619-4088-80C2-C3F7F9BBD506}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.Persistence", "LedSoft.Persistence\LedSoft.Persistence.csproj", "{C1106A57-7619-4088-80C2-C3F7F9BBD506}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSoft.Server", "LedSoft\Server\LedSoft.Server.csproj", "{2ED857D3-4A4E-46AC-82D8-1642D93CAB8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.Server", "LedSoft\Server\LedSoft.Server.csproj", "{2ED857D3-4A4E-46AC-82D8-1642D93CAB8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSoft.Client", "LedSoft\Client\LedSoft.Client.csproj", "{83537D90-EF63-47FF-8C6B-9489D095E4EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.Client", "LedSoft\Client\LedSoft.Client.csproj", "{83537D90-EF63-47FF-8C6B-9489D095E4EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedSoft.Shared", "LedSoft\Shared\LedSoft.Shared.csproj", "{E0CC4894-F8B5-499B-8696-973EE2C4EC52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.Shared", "LedSoft\Shared\LedSoft.Shared.csproj", "{E0CC4894-F8B5-499B-8696-973EE2C4EC52}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LedSoft.mobile", "LedSoft.mobile\LedSoft.mobile.csproj", "{C91375FB-8DEA-4197-AF6E-C10D6FF15B58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,12 @@ Global
 		{E0CC4894-F8B5-499B-8696-973EE2C4EC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0CC4894-F8B5-499B-8696-973EE2C4EC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0CC4894-F8B5-499B-8696-973EE2C4EC52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C91375FB-8DEA-4197-AF6E-C10D6FF15B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C91375FB-8DEA-4197-AF6E-C10D6FF15B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C91375FB-8DEA-4197-AF6E-C10D6FF15B58}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C91375FB-8DEA-4197-AF6E-C10D6FF15B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C91375FB-8DEA-4197-AF6E-C10D6FF15B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C91375FB-8DEA-4197-AF6E-C10D6FF15B58}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +77,7 @@ Global
 		{2ED857D3-4A4E-46AC-82D8-1642D93CAB8C} = {21785790-F06C-4C4D-97E5-C01A1362955E}
 		{83537D90-EF63-47FF-8C6B-9489D095E4EE} = {21785790-F06C-4C4D-97E5-C01A1362955E}
 		{E0CC4894-F8B5-499B-8696-973EE2C4EC52} = {21785790-F06C-4C4D-97E5-C01A1362955E}
+		{C91375FB-8DEA-4197-AF6E-C10D6FF15B58} = {21785790-F06C-4C4D-97E5-C01A1362955E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D3FECC8-9A57-477F-AE39-84B2B0571DC6}

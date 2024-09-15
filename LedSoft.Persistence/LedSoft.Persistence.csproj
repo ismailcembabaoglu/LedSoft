@@ -36,7 +36,7 @@
     <Folder Include="Features\Cari\Commands\" />
     <Folder Include="Features\Cari\Queries\" />
     <Folder Include="Features\Kategori\Commands\" />
-    <Folder Include="Features\StokTanimBarkod\Queries\" />
+    <Folder Include="Features\User\Queries\" />
   </ItemGroup>
 
 </Project>

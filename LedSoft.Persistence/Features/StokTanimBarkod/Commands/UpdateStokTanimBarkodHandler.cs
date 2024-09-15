@@ -30,6 +30,7 @@ namespace LedSoft.Persistence.Features.StokTanimBarkod.Commands
             var dbStokBarkod = await _context.StoktanimBarkods.AsNoTracking().Where(c => c.Id == request.Id).FirstOrDefaultAsync(cancellationToken);
             Guard.Against.Null(dbStokBarkod, "Barkod Bulunamadığı için güncelleme işlemi yapılamıyor");
             _mapper.Map(request, dbStokBarkod);
+            _context.StoktanimBarkods.Update(dbStokBarkod);
            int result =await _context.SaveChangesAsync(cancellationToken);
             return new ServiceResponse<StoktanimBarkodDTO>()
             {
